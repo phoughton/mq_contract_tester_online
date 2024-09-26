@@ -1,0 +1,27 @@
+# Set up the Rabbit MQ
+#
+# Edit the creds you want to use...
+#
+sudo apt-get update -y
+echo
+sudo apt-get install rabbitmq-server -y
+echo
+sudo service rabbitmq-server start
+sleep 1
+echo
+sudo rabbitmq-plugins enable rabbitmq_management
+echo
+sudo service rabbitmq-server restart
+sleep 1
+echo
+sudo rabbitmqctl add_user engineer yourpassword
+echo
+sudo rabbitmqctl set_user_tags engineer administrator
+echo
+sudo rabbitmqctl set_permissions -p / engineer ".*" ".*" ".*"
+echo
+sudo service rabbitmq-server restart
+echo
+service --status-all
+# Then, open the management console by visiting http://localhost:15672. 
+# engineer / yourpassword
